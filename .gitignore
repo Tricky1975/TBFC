@@ -5,6 +5,9 @@
 MKL*
 *.MKL.*
 
+# Unix Bin Ignore
+ubin
+
 # User-specific files
 *.suo
 *.user
