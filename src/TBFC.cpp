@@ -51,7 +51,7 @@ void Translate(string file) {
 			src.close();
 			return;
 		}
-		tar << "#include <stdio.h>\n int main(void) {\n\tunsigned char ptr=0;\n\tunsigned char val[256];\n\n\tfor(int i=0;i<256;++i) val[i]=0;\n";
+		tar << "#include <stdio.h>\n\n#include <conio.h>\nint main(void) {\n\tunsigned char ptr=0;\n\tunsigned char val[256];\n\n\tfor(int i=0;i<256;++i) val[i]=0;\n";
 		while (!src.eof()) {
 			char c;
 			src.read(&c, 1);
@@ -61,7 +61,8 @@ void Translate(string file) {
 			case '+': tar << "\t++val[ptr];\n"; instructions++; break;
 			case '-': tar << "\t--val[ptr];\n"; instructions++; break;
 			case '.': tar << "\tputchar(val[ptr]);\n"; instructions++; break;
-			case ',': tar << "\tval[ptr]=getchar();\n"; instructions++; break;
+			//case ',': tar << "\tval[ptr]=getchar();\n"; instructions++; break;
+			case ',': tar << "\tval[ptr]=getch(); putchar(val[ptr]);\n"; instructions++; break;
 			case '[': tar << "\twhile(val[ptr]) {\n"; instructions++; break;
 			case ']': tar << "\t}\n"; instructions++; break;
 			}
